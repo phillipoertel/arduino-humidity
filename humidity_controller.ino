@@ -23,7 +23,8 @@
 // keep the actual humidity within this range
 #define ALLOWED_HUMIDITY_DEVIATION 2
 
-#define LOOP_DELAY 1000
+// DHT22 gives new readings every 2 seconds
+#define LOOP_DELAY 2000
 
 // track how often the relay gets turned on
 int numCycles = 0;
@@ -115,6 +116,7 @@ String getUptime() {
   long uptimeInSeconds = millis() / 1000;
   int s = uptimeInSeconds % 60;
   int m = (uptimeInSeconds / 60) % 60;
-  int h = (uptimeInSeconds/ (60 * 60) ) % 24;
-  return String(String(h) + "h" + String(m) + "m");
+  int h = (uptimeInSeconds / (60 * 60) ) % 24;
+  int d = (uptimeInSeconds / (60 * 60 * 24));
+  return String(String(d) + "d" + String(h) + "h" + String(m) + "m");
 }
